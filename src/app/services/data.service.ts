@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
 
-  URL:string = 'http://localhost:5000'
+  URL:string = 'http://localhost:4000'
 
   constructor(
     private httpClient:HttpClient
@@ -19,7 +19,15 @@ export class DataService {
     return this.httpClient.delete(`${this.URL}/api/data/${id}`) 
    }
 
-   updateData(){
-    return this.httpClient.get('') 
+   updateData(data:any){
+    return this.httpClient.put(`${this.URL}/api/data/${data._id}`,data) 
+   }
+
+   startCrawler(data:any){
+    return this.httpClient.post(`${this.URL}/api/data/save`,data) 
+   }
+
+   getDataToCharts(){
+    return this.httpClient.get(`${this.URL}/api/data/charts`) 
    }
 }
